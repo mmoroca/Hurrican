@@ -43,6 +43,21 @@ OpenGL Options
 * -DFBO=ON                : Add FBO support, allow screen to be scaled to arbitrary dimensions, available only with GL2 or GL3 and enabled by default
 * -DDEFAULT_SCREENBPP=<16|24|32> : Set the default screen depth, 32 if not specified
 
+### macOS
+
+Tested on macOS (Apple Silicon, M1 Pro). Build with the GL3 renderer:
+
+```bash
+brew install sdl2 sdl2_image cmake libepoxy
+git clone --recurse-submodules https://github.com/mmoroca/Hurrican.git
+cd Hurrican/Hurrican
+mkdir build && cd build
+cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH=/opt/homebrew -DRENDERER=GL3 ..
+cmake --build . --parallel
+cd ..
+./build/hurrican
+```
+
 Sound
 * -DOPENMPT=ON            : Use the libopenmpt code for music (SDL2_mixer uses libmodplug while SDL_mixer uses the lower quality mikmod engine)
 
