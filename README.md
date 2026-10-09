@@ -8,6 +8,8 @@ Original code by Eiswuxe (Poke53280) [[Winterworks](https://www.winterworks.de/p
 Further work by [Pickle136](https://sourceforge.net/projects/hurrican/), Stefan Schmidt ([thrimbor](https://github.com/thrimbor/Hurrican)) and Leandro Nini ([drfiemost](https://github.com/drfiemost/Hurrican))  
 CRT simulation partially based on [CRT effect - Shadertoy, Unity](https://luka712.github.io/2018/07/21/CRT-effect-Shadertoy-Unity/) article from luka712's blog
 
+Apple Silicon (macOS) port by [@mmoroca](https://github.com/mmoroca) & [brave.ai](https://brave.ai) 2026 (see [PR #96](https://github.com/HurricanGame/Hurrican/pull/96))
+
 ![screenshot](https://github.com/HurricanGame/Hurrican/wiki/images/level1.png)
 
 ---
