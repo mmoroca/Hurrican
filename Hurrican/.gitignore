@@ -1,10 +1,1 @@
-# Build
-build/
-*.o
-*.a
-
-# macOS
 .DS_Store
-*.app/
-*.dmg
-
