@@ -33,6 +33,17 @@ The following build options are available:
 Predefined platforms
 * -DPLATFORM=<RPI|GCW|RDU|RDU2|PANDORA> : Compile for the specified platform, setting the correct options
 
+NOTE: On macOS you need to install some SDL2 libraries through brew, then cmake with GL3 (see [notes.md](https://github.com/mmoroca/Hurrican/blob/master/Hurrican/notes.md)):
+
+    brew install sdl2 sdl2_image sdl2_mixer cmake libepoxy
+    git clone --recurse-submodules https://github.com/mmoroca/Hurrican.git
+    cd Hurrican/Hurrican
+    mkdir build && cd build
+    cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH=/opt/homebrew -DRENDERER=GL3 ..
+    cmake --build . --parallel
+    cd ..
+    ./build/hurrican
+
 OpenGL Options
 * -DRENDERER=GL1          : Use the OpenGL 1.X code (fixed pipline)
 * -DRENDERER=GLES1        : Use the OpenGL 1.X code with ES compatible
