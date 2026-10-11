@@ -150,14 +150,14 @@ bool DirectJoystickClass::Init(int joy) {
             enterButton = bind.value.button;
             Protokoll << "Enter function mapped to button A (" << enterButton << ")" << std::endl;
         }
-        // try mapping BACK button
-        bind = SDL_GameControllerGetBindForButton(controller, SDL_CONTROLLER_BUTTON_BACK);
+        // try mapping BACK button - mmoroca: try first B button, then BACK button
+        bind = SDL_GameControllerGetBindForButton(controller, SDL_CONTROLLER_BUTTON_B);
         if (bind.bindType == SDL_CONTROLLER_BINDTYPE_BUTTON) {
             backButton = bind.value.button;
             Protokoll << "Back function mapped to button BACK (" << backButton << ")" << std::endl;
         } else {
             // fallback to B button
-            bind = SDL_GameControllerGetBindForButton(controller, SDL_CONTROLLER_BUTTON_B);
+            bind = SDL_GameControllerGetBindForButton(controller, SDL_CONTROLLER_BUTTON_BACK);
             if (bind.bindType == SDL_CONTROLLER_BINDTYPE_BUTTON) {
                 backButton = bind.value.button;
                 Protokoll << "Back function mapped to button B (" << backButton << ")" << std::endl;
@@ -172,7 +172,7 @@ bool DirectJoystickClass::Init(int joy) {
             // fallback to Y button
             bind = SDL_GameControllerGetBindForButton(controller, SDL_CONTROLLER_BUTTON_Y);
             if (bind.bindType == SDL_CONTROLLER_BINDTYPE_BUTTON) {
-                backButton = bind.value.button;
+                deleteButton = bind.value.button; // mmoroca: bugfix, set deleteButton instead of backButton 
                 Protokoll << "Delete function mapped to button Y (" << backButton << ")" << std::endl;
             }
         }
