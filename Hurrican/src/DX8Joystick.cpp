@@ -236,7 +236,7 @@ bool DirectJoystickClass::Update() {
         if (NumAxis > 1) {
             // DKS - Map range of motion from SDL's (+/- 32768) to the original game's (+/- 1000)
             JoystickX = static_cast<int>(SDL_JoystickGetAxis(lpDIJoystick, 0) * (1000.0f / 32767.0f));
-            JoystickY = static_cast<int>(SDL_JoystickGetAxis(lpDIJoystick, 1) * (1000.0f / 32767.0f));
+            JoystickY = static_cast<int>(-SDL_JoystickGetAxis(lpDIJoystick, 1) * (1000.0f / 32767.0f)); /* mmoroca: Joystick * -1 (SDL 1.2 vs SDL 2.0) */
         }
 
         if (NumHats > 0) {
