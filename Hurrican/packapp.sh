@@ -42,27 +42,12 @@ install_name_tool -add_rpath @loader_path "$FW/libSDL2-2.0.0.dylib"
 # 5. Añadir rpath para que encuentre las librerías
 install_name_tool -add_rpath @executable_path/../Frameworks "$BIN"
 
-# 6. Wrapper launcher
-cat > "$APP/Contents/MacOS/launcher" << 'EOF'
-#!/bin/bash
-BIN_DIR="$(cd "$(dirname "$0")" && pwd)"
-RES_DIR="$BIN_DIR/../Resources"
-
-# Si el volumen es de solo lectura (DMG), usar un dir temporal escribible
-if [ ! -w "$RES_DIR" ]; then
-    WORK_DIR=$(mktemp -d)/Hurrican
-    mkdir -p "$WORK_DIR"
-    ln -s "$RES_DIR/data" "$WORK_DIR/data"
-    ln -s "$RES_DIR/lang" "$WORK_DIR/lang"
-    cd "$WORK_DIR"
-else
-    cd "$RES_DIR"
-fi
-
-touch Game_Log.txt 2>/dev/null
-exec "$BIN_DIR/hurrican" "$@"
-EOF
-chmod +x "$APP/Contents/MacOS/launcher"   
+# 6. Compilar launcher (AppKit, sin macros)
+swiftc -o "$APP/Contents/MacOS/hurrican-launcher" \
+    launcher/main.swift \
+    -framework Cocoa \
+    -O
+chmod +x "$APP/Contents/MacOS/hurrican-launcher"   
 
 # 7. Icono
 ICONSET=$(mktemp -d)/icon.iconset
@@ -89,7 +74,7 @@ cat > "$APP/Contents/Info.plist" << 'EOF'
 <plist version="1.0">
 <dict>
     <key>CFBundleExecutable</key>
-    <string>launcher</string>
+    <string>hurrican-launcher</string>   
     <key>CFBundleIdentifier</key>
     <string>io.github.hurricangame.hurrican</string>
     <key>CFBundleName</key>
